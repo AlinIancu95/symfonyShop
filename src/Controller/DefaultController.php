@@ -18,26 +18,23 @@ class DefaultController extends AbstractController
      */
     public function index(CategoryRepository $categoryRepository): Response
     {
-        return $this->render('default/index.html.twig',['categories'=>$categoryRepository->findAll()]);
+        return $this->render('default/index.html.twig', ['categories'=>$categoryRepository->findAll()]);
     }
 
     /**
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * @Route("/sayHello/{firstName}/{lastName}", name="test")
-     */
-    public function test($firstName, $lastName): Response
-    {
-        $name = "$firstName $lastName";
-
-        return $this->render('default/test.html.twig',['name'=>$name]);
-    }
-
-    /**
-     * @IsGranted("ROLE_ADMIN")
      * @Route("/category/{category}", name="category")
      */
-    public function category(Category $category): Response
+    public function category(Category $category, CategoryRepository $categoryRepository): Response
     {
-        return $this->render('default/category.html.twig',['category'=>$category]);
+        return $this->render('default/category.html.twig', ['category'=>$category, 'categories'=>$categoryRepository->findAll()]);
+    }
+
+
+    /**
+     * @Route("/header/{header}", name="header")
+     */
+    public function header(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('default/parts/header.html.twig', ['categories'=>$categoryRepository->findAll()]);
     }
 }

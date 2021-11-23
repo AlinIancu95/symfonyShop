@@ -1,0 +1,98 @@
+{% block body %}
+    <div class="container-fluid bg-dark">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-dark bg-dark justify-content-between">
+                            <a href="{{ url('homepage') }}" class="navbar-brand"><img width="100px" src="{{ asset('images/logo.png') }}"  alt="logo.png"></a>
+                            <form class="form-inline">
+                                <input  class="form-control mr-sm-2" type="search" placeholder="Rapid si ieftin" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user-o" aria-hidden="true"></i>
+                                                Contul meu
+                                            </a>
+                                            <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownMenuLink">
+                                                <a class="dropdown-item bg-secondary text-white"  href="#">Logheaza-te in cont</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item  bg-secondary text-white" href="{{ url('app_register') }}">Cont nou</a>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                Cosul Meu
+                                            </a>
+                                            <div class="dropdown-menu bg-secondary text-center" aria-labelledby="navbarDropdownMenuLink">
+                                                <div class="dropdown-item bg-secondary text-white">
+                                                    <img src="#">Produs - pret     <button type="submit" class="btn btn-danger align-right">X</button>
+                                                </div>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="btn btn-secondary" href="#">Detalii cos</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-secondary">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto ">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="{{ url('homepage') }}">Home</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Categorii
+                                        </a>
+                                        <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                                            {% for category in categories %}
+                                                <a class="dropdown-item bg-secondary" href="{{ url('category', {'category':category.id}) }}">
+                                                    {{ category.name }}
+                                                    <span class="badge badge-dark">{{ category.getProducts()|length }}</span>
+                                                    <div class="dropdown-divider"></div>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown bg-secondary">
+                                        <a class="nav-link dropdown-toggle bg-secondary text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Vendori
+                                        </a>
+                                        <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item bg-secondary text-white" href="#">eMag</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item bg-secondary text-white" href="#">MediaGalaxy</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="#">Suport clienti</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="#">Admin Panel</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

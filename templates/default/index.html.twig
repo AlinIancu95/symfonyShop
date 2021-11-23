@@ -1,35 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %} GEN Market{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <ul>
-        {% for category in categories %}
-            <li><a href="{{ url('category',{'category':category.id}) }}">{{ category.name }}</a></li>
-        {% endfor %}
-    </ul>
-    {% if app.user %}
-        <p>This paragh is hidden!!!!</p>
-    {% endif %}
-    This is the homepage
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-    <br /><a href=" {{ url('test',{'firstName':'Alin','lastName':'Iancu'}) }}">Say hello to Alin Iancu</a>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-2 list-group mt-2 mb-2">
+                <ul>
+                    <h3>Produse</h3>
+                    {% for category in categories %}
+                        <div class="btn-group dropright list-group col-12 mt-1">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ category.name }}
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="{{ url('category', {'category':category.id}) }}">{{ category.name }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-7">
+                {{  include ('default/parts/indexCarousel.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
