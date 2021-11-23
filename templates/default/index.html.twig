@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-2 list-group mt-2 mb-2">
+            <div class="col-3 list-group mt-2 mb-2">
                 <ul>
                     <h3>Produse</h3>
                     {% for category in categories %}
@@ -20,9 +20,19 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-7">
+            <div class="col-9">
                 {{  include ('default/parts/indexCarousel.html.twig') }}
             </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                <h3>Cele mai noi produse</h3>
+            </div>
+            {% for product in products %}
+                {{ include ('default/product/productCard.html.twig') }}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

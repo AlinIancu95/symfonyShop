@@ -13,17 +13,31 @@
                             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                     <ul class="navbar-nav">
+                                        {% if app.user %}
+                                            <li class="nav-item dropdown active">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                                    {{ app.user.username }}
+                                                </a>
+                                                <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownMenuLink">
+                                                    <a class="dropdown-item bg-secondary text-white"  href="{{ url('app_login') }}">Intra in cont</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item  bg-secondary text-white" href="{{ path('app_logout') }}">Logout</a>
+                                                </div>
+                                            </li>
+                                        {% else %}
                                         <li class="nav-item dropdown active">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-user-o" aria-hidden="true"></i>
                                                 Contul meu
                                             </a>
                                             <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownMenuLink">
-                                                <a class="dropdown-item bg-secondary text-white"  href="#">Logheaza-te in cont</a>
+                                                <a class="dropdown-item bg-secondary text-white"  href="{{ url('app_login') }}">Logheaza-te in cont</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item  bg-secondary text-white" href="{{ url('app_register') }}">Cont nou</a>
                                             </div>
                                         </li>
+                                        {% endif %}
                                         <li class="nav-item dropdown active">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -76,9 +90,13 @@
                                             Vendori
                                         </a>
                                         <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item bg-secondary text-white" href="#">eMag</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item bg-secondary text-white" href="#">MediaGalaxy</a>
+                                            {% for vendor in vendors %}
+                                                <a class="dropdown-item bg-secondary" href="{{ url('vendor', {'vendor':vendor.id}) }}">
+                                                    {{ vendor.name }}
+                                                    <span class="badge badge-dark">{{ vendor.getProducts()|length }}</span>
+                                                    <div class="dropdown-divider"></div>
+                                                </a>
+                                            {% endfor %}
                                         </div>
                                     </li>
                                     <li class="nav-item">

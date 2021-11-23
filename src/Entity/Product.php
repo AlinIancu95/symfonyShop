@@ -276,4 +276,11 @@ class Product
 
         return $this;
     }
+
+    public function getFinalPrice()
+    {
+        $price = $this->price - $this->price*$this->discount/100;
+
+        return $price;
+    }
 }

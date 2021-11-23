@@ -20,7 +20,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    private EmailVerifier $emailVerifier;
+private EmailVerifier $emailVerifier;
 
     public function __construct(EmailVerifier $emailVerifier)
     {
@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordEncoder->encodePassword(
+                $userPasswordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
