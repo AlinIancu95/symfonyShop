@@ -24,6 +24,8 @@ class DefaultController extends AbstractController
             ['categories'=>$categoryRepository->findAll(),
             'vendors'=>$vendorRepository->findAll(),
                 'products'=>$productRepository->findBy([], ['id'=>'DESC'],4),
+                'productsLaptop'=>$productRepository->findBy(['category'=>2], ['id'=>'DESC'], 4),
+                'productsTV'=>$productRepository->findBy(['category'=>1], ['id'=>'DESC'], 4)
             ]);
     }
 

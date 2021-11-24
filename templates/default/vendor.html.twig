@@ -9,9 +9,9 @@
                 <div class="col-12 mt-3">
                     <h2>{{ vendor.name }} </h2> <strong><p>{{ vendor.getProducts()|length }} produse</p></strong>
                 </div>
-                <div class="col-12">
-
-                </div>
+                {% for product in vendor.getProducts() %}
+                    {{ include ('default/product/productCard.html.twig') }}
+                {% endfor %}
             </div>
         </div>
     </div>

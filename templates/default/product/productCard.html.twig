@@ -1,15 +1,15 @@
 {% block content %}
     <div class="col-3 mt-2 px-4  pt-2 mb-4">
         <div class="card">
-            <a href="#"><img class="card-img-top" src="images/{{ product.getImages().first.file }}" alt="{{ product.name }}"></a>
+            <a href="#"><img class="card-img-top mt-3" src="{{ asset('images/' ~ product.images.first) }}" alt="{{ product.name }}"></a>
             <div class="card-body text-center">
                 <h5 style="height: 40px" class="card-title">{{ product.name }}</h5>
                 <p><a href={{ url('vendor', {'vendor':product.getVendor().id}) }}>{{ product.getVendor().name }}</a></p>
                 <p>
-                    <s><h4>{{ product.price }} <span>Lei</span></s>
-                    <span class="product-this-deal">(-{{ product.discount }}%)</span>
-                    </h4>
-                    <h3 style="color: red;">{{ product.getFinalPrice() }} <span>Lei</span></h3>
+                    <h5><s>{{ product.price |number_format(2, '.', '.') }} <span>Lei</span></s>
+                    <span>(-{{ product.discount }}%)</span>
+                    </h5>
+                    <h4 style="color: red;">{{ product.getFinalPrice() |number_format(2, '.', '.') }} <span>Lei</span></h4>
                 </p>
                 <a href="#" class="btn btn-secondary">Adauga in cos</a>
             </div>
