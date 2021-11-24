@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\VendorRepository;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +32,7 @@ private EmailVerifier $emailVerifier;
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
     {
         $user = new User();
         $user->setRoles(['ROLE_USER']);
@@ -69,6 +71,8 @@ private EmailVerifier $emailVerifier;
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'categories'=>$categoryRepository->findAll(),
+            'vendors'=>$vendorRepository->findAll()
         ]);
     }
 

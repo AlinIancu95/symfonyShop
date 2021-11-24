@@ -3,13 +3,15 @@
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                This is {{ category.name }} category!!!
-            </div>
-            <div class="col-12">
-                {{ include ('default/product/productCard.html.twig') }}
+    <div class="container-fluid bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <h2>{{ category.name }} </h2> <strong><p>{{ category.getProducts()|length }} produse</p></strong>
+                </div>
+                {% for product in category.getProducts() %}
+                    {{ include ('default/product/productCard.html.twig') }}
+                {% endfor %}
             </div>
         </div>
     </div>

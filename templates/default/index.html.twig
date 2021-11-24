@@ -3,36 +3,51 @@
 {% block title %} GEN Market{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-3 list-group mt-2 mb-2">
-                <ul>
-                    <h3>Produse</h3>
-                    {% for category in categories %}
-                        <div class="btn-group dropright list-group col-12 mt-1">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ category.name }}
-                            </button>
-                            <div class="dropdown-menu">
-                                <a href="{{ url('category', {'category':category.id}) }}">{{ category.name }}</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-9">
-                {{  include ('default/parts/indexCarousel.html.twig') }}
+    <div class="bg-light">
+        <div class="container-fluid bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 list-group mt-2 mb-2">
+                        <ul>
+                            <h3>Produse</h3>
+                            {% for category in categories %}
+                                <div class="btn-group dropright list-group col-12 mt-1">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ category.name }}
+                                    </button>
+                                    <div class="dropdown-menu bg-secondary">
+                                        <a class="text-white" href="{{ url('category', {'category':category.id}) }}">{{ category.name }}</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-9">
+                        {{  include ('default/parts/indexCarousel.html.twig') }}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12">
-                <h3>Cele mai noi produse</h3>
+        <div class="container-fluid bg-info">
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Cele mai noi produse</h3>
+                    </div>
+                    {% for product in products %}
+                        {{ include ('default/product/productCard.html.twig') }}
+                    {% endfor %}
+                </div>
             </div>
-            {% for product in products %}
-                {{ include ('default/product/productCard.html.twig') }}
-            {% endfor %}
+        </div>
+        <div class="container-fluid bg-light">
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Laptop-uri</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

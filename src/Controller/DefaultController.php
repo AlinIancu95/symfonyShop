@@ -23,9 +23,8 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig',
             ['categories'=>$categoryRepository->findAll(),
             'vendors'=>$vendorRepository->findAll(),
-                'products'=>$productRepository->findBy([], ['id'=>'DESC'],6)
-            ]
-        );
+                'products'=>$productRepository->findBy([], ['id'=>'DESC'],4),
+            ]);
     }
 
     /**
@@ -36,8 +35,7 @@ class DefaultController extends AbstractController
         return $this->render('default/category.html.twig',
             ['category'=>$category, 'categories'=>$categoryRepository->findAll(),
                 'vendors'=>$vendorRepository->findAll()
-            ]
-        );
+            ]);
     }
 
     /**
@@ -49,8 +47,7 @@ class DefaultController extends AbstractController
             [   'vendor'=>$vendor,
                 'vendors'=>$vendorRepository->findAll(),
                 'categories'=> $categoryRepository->findAll()
-            ]
-        );
+            ]);
     }
 
     /**
