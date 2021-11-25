@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - GEN Market{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <h1>{{ product.name }}</h1>
+                </div>
+                <div class="col-2">
+                    <p class="bg-light"><strong>Cod product: {{ product.code }}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-1 mt-2">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        {% for image in product.images %}
+                                            <img style="border: 1px solid #28A443" class="d-block w-100 mt-2" src="{{ asset('images/' ~ image) }}" alt="{{ image.file }}">
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <img class="card-img-top mt-3" src="{{ asset('images/' ~ product.images.first) }}" alt="{{ product.name }}">
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span><i class="fa fa-star" aria-hidden="true"></i></span>
+                                <span>x</span>
+                                <a href="#">reviews</a>
+                            </div>
+                            <div>
+                                <span>
+                                    Vandut si livrat de: <a href="{{ url('vendor', {'vendor':product.vendor.id}) }}">{{ product.vendor.name }}</a>
+                                </span>
+                            </div>
+                            <div class="mt-2">
+                                Garantie comerciala: <strong>24 luni</strong>
+                            </div>
+                            <div class="text-center mt-4" style="border: 2px solid #28A443">
+                                <p class="mt-2" style="font-size:130%">Rezerva in magazin si livram astazi</p>
+                            </div>
+                            <div class="mt-4">
+                                <h3>Servicii</h3>
+                                <a href="#" class="btn btn-secondary mt-1">Extra garantie 1 an: x lei</a>
+                                <a href="#" class="btn btn-secondary mt-1">Extra garantie 2 ani: x lei</a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <h5><s>{{ product.price |number_format(2, '.', '.') }}</s> Lei (-{{ product.discount }}%)</h5>
+                                <h3 style="color: red">{{ product.finalPrice |number_format(2, '.', '.') }} Lei</h3>
+                            </div>
+                            <a href="#" class="btn btn-secondary w-100 mt-4">Adauga in Cos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ dump(product) }}
+    </div>
+
+{% endblock %}

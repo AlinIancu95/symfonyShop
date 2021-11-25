@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Vendor;
+use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\VendorRepository;
@@ -25,7 +26,8 @@ class DefaultController extends AbstractController
             'vendors'=>$vendorRepository->findAll(),
                 'products'=>$productRepository->findBy([], ['id'=>'DESC'],4),
                 'productsLaptop'=>$productRepository->findBy(['category'=>2], ['id'=>'DESC'], 4),
-                'productsTV'=>$productRepository->findBy(['category'=>1], ['id'=>'DESC'], 4)
+                'productsTV'=>$productRepository->findBy(['category'=>1], ['id'=>'DESC'], 4),
+                'productsPhone'=>$productRepository->findBy(['category'=>3], ['id'=>'DESC'], 4)
             ]);
     }
 
@@ -58,5 +60,17 @@ class DefaultController extends AbstractController
     public function header(CategoryRepository $categoryRepository): Response
     {
         return $this->render('default/parts/header.html.twig', ['categories'=>$categoryRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/product/{product}", name="product")
+     */
+    public function product(Product $product, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
+    {
+        return $this->render('default/product.html.twig',
+            [   'categories'=>$categoryRepository->findAll(),
+                'vendors'=>$vendorRepository->findAll(),
+                    'product'=>$product
+            ]);
     }
 }

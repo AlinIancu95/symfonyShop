@@ -1,7 +1,7 @@
 {% block content %}
     <div class="col-3 mt-2 px-4  pt-2 mb-4">
         <div class="card">
-            <a href="#"><img class="card-img-top mt-3" src="{{ asset('images/' ~ product.images.first) }}" alt="{{ product.name }}"></a>
+            <a href="{{ url('product', {'product':product.id})  }}"><img class="card-img-top mt-3" src="{{ asset('images/' ~ product.images.first) }}" alt="{{ product.name }}"></a>
             <div class="card-body text-center">
                 <h5 style="height: 40px" class="card-title">{{ product.name }}</h5>
                 <p><a href={{ url('vendor', {'vendor':product.getVendor().id}) }}>{{ product.getVendor().name }}</a></p>

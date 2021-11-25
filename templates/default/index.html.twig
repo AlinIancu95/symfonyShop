@@ -16,7 +16,7 @@
                                         {{ category.name }}
                                     </button>
                                     <div class="dropdown-menu bg-secondary">
-                                        <a class="text-white" href="{{ url('category', {'category':category.id}) }}">{{ category.name }}</a>
+                                        <a class="text-white" href="">{{ category.name }}</a>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -59,6 +59,18 @@
                         <h3>Televizoare</h3>
                     </div>
                     {% for product in productsTV %}
+                        {{ include ('default/product/productCard.html.twig') }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-light">
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Telefoane mobile</h3>
+                    </div>
+                    {% for product in productsPhone %}
                         {{ include ('default/product/productCard.html.twig') }}
                     {% endfor %}
                 </div>
