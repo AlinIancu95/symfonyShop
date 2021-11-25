@@ -4,13 +4,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <nav class="navbar navbar-dark bg-dark justify-content-between">
+                        <div class="row">
+                            <div class="col-2">
                             <a href="{{ url('homepage') }}" class="navbar-brand"><img width="100px" src="{{ asset('images/logo.png') }}"  alt="logo.png"></a>
-                            <form class="form-inline">
-                                <input  class="form-control mr-sm-2" type="search" placeholder="Rapid si ieftin" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
-                            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            </div>
+                            <div class="col-6">
+                                <form class="form-inline mt-3 w-100">
+                                    <input  class="form-control mr-sm-2 w-75" type="search" placeholder="Rapid si ieftin" aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cauta</button>
+                                </form>
+                            </div>
+                            <div class="navbar navbar-expand-lg navbar-dark bg-dark col-4">
                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                                     <ul class="navbar-nav">
                                         {% if app.user %}
@@ -53,8 +57,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </nav>
-                        </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,7 +91,7 @@
                                     </li>
                                     <li class="nav-item dropdown bg-secondary">
                                         <a class="nav-link dropdown-toggle bg-secondary text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Vendori
+                                            Vanzatori
                                         </a>
                                         <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
                                             {% for vendor in vendors %}
@@ -101,7 +105,7 @@
                                     </li>
                                     {% if is_granted('ROLE_ADMIN')  %}
                                         <li class="nav-item">
-                                            <a class="nav-link text-white" href="{{ url('user_index') }}">Admin Panel</a>
+                                            <a class="nav-link text-white" href="{{ url('adminPanel') }}">Admin Panel</a>
                                         </li>
                                     {% endif %}
                                 </ul>

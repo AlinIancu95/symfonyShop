@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Autentificare client{% endblock %}
 
 {% block body %}
     <div class="bg-light">
-        <div class="container">
+        <div class="container mt-3" style="height: 500px">
             <div class="row">
                 <div class="col-4">
                     <form method="post">
@@ -12,13 +12,7 @@
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
 
-                        {% if app.user %}
-                            <div class="mb-3">
-                                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                            </div>
-                        {% endif %}
-
-                        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                        <h1 class="h3 mb-3 font-weight-normal">Autenfica-te</h1>
                         <label for="inputEmail">Email</label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
                         <label for="inputPassword">Password</label>
@@ -40,11 +34,11 @@
                         #}
 
                         <button class="btn btn-lg btn-secondary" type="submit">
-                            Sign in
+                            Intra in cont
                         </button>
                     </form>
-                    <a href="{{ url('app_forgot_password_request') }}">Forgot password</a>
-                    <br /><a href="{{ url('app_register') }}">Register</a>
+                    <a href="{{ url('app_forgot_password_request') }}">Ai uitat parola?</a>
+                    <br /><a href="{{ url('app_register') }}">Nu ai un cont?</a>
                 </div>
             </div>
         </div>

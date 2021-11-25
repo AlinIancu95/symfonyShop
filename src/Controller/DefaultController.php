@@ -73,4 +73,15 @@ class DefaultController extends AbstractController
                     'product'=>$product
             ]);
     }
+
+    /**
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/adminPanel/", name="adminPanel")
+     */
+    public function adminPanel(): Response
+    {
+        return $this->render('default/adminPanel.html.twig', [
+
+        ]);
+    }
 }

@@ -3,9 +3,18 @@
 {% block title %}Password Reset Email Sent{% endblock %}
 
 {% block body %}
-    <p>
-        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <div class="bg-light">
+        <div class="container mt-3" style="height: 500px">
+            <div class="row">
+                <div class="col-12">
+                    <p>
+                        Dacă există un cont care se potrivește cu e-mailul dvs., atunci a fost trimis un e-mail care conține un link pe care îl puteți utiliza pentru a vă reseta parola.
+                        Acest link va expira într-o oră.  {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                    </p>
+                    <p>Dacă nu primiți un e-mail, vă rugăm să verificați folderul de spam sau <a href="{{ path('app_forgot_password_request') }}">încearcă din nou</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
