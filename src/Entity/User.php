@@ -351,4 +351,14 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+
+    public function __toString() {
+        if(is_null($this->userName)) {
+            return 'NULL';
+        }
+        return $this->userName;
+    }
+
 }

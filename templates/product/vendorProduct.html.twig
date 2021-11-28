@@ -1,6 +1,15 @@
-{% block title %}Add Product for Vendor{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Adauga Produs{% endblock %}
 
 {% block body %}
-    {{ form(vendorProductForm) }}
+    <div class="bg-light">
+        <div class="container" style="height: 1500px">
+            <div class="row">
+                <div class="col-4 mt-3">
+                    {{ form(vendorProductForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

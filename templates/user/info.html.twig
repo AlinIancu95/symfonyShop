@@ -2,7 +2,8 @@
 {% block title %}Date personale{% endblock %}
 
 {% block body %}
-    <div class="container-fluid bg-light">
+    {% if app.user.firstName is null %}
+        <div class="container-fluid bg-light">
             <div class="container" style="height: 500px">
                 <div class="row">
                     <div class="col-4 mt-3">
@@ -11,5 +12,26 @@
                 </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="container-fluid bg-light">
+            <div class="container" style="height: 500px">
+                <div class="row">
+                    <div class="col-4 mt-3">
+                        <div class="col-3">
+                            <h5>Username</h5>
+                            <p class="form-control"><strong>{{ app.user }}</strong></p>
+                        </div>
+                        <div class="col-3 ">
+                            <h5>Prenume</h5>
+                            <p class="form-control"><strong>{{ app.user.firstname }}</strong></p>
+                        </div>
+                        <div class="col-3">
+                            <h5>Nume</h5>
+                            <p class="form-control"><strong>{{ app.user.lastname }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

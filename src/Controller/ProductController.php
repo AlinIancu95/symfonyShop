@@ -32,7 +32,7 @@ class ProductController extends AbstractController
      * @IsGranted("ROLE_VENDOR")
      * @Route("vendorProduct/create", name="vendorProduct_form")
      */
-    public function create(Request $request): Response
+    public function create(Request $request, VendorRepository $vendorRepository, CategoryRepository $categoryRepository): Response
     {
         $product = new Product();
         $product->setType('product');
@@ -46,8 +46,9 @@ class ProductController extends AbstractController
 
         }
         return $this->render('product/vendorProduct.html.twig', [
-            'vendorProductForm' => $vendorProductForm->createView()
-
+            'vendorProductForm' => $vendorProductForm->createView(),
+            'vendors'=>$vendorRepository->findAll(),
+            'categories'=> $categoryRepository->findAll()
         ]);
 
     }
@@ -56,7 +57,7 @@ class ProductController extends AbstractController
      * @IsGranted("ROLE_VENDOR")
      * @Route("vendorProduct/edit/{product}", name="vendorProduct_edit")
      */
-    public function edit(Product $product,Request $request): Response
+    public function edit(Product $product,Request $request, VendorRepository $vendorRepository, CategoryRepository $categoryRepository): Response
     {
         $vendorProductForm = $this->createForm(VendorProductType::class, $product);
 
@@ -68,8 +69,9 @@ class ProductController extends AbstractController
 
         }
         return $this->render('product/vendorProduct.html.twig', [
-            'vendorProductForm' => $vendorProductForm->createView()
-
+            'vendorProductForm' => $vendorProductForm->createView(),
+            'vendors'=>$vendorRepository->findAll(),
+            'categories'=> $categoryRepository->findAll()
         ]);
 
     }
