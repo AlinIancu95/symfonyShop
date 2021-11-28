@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Vendor;
-use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\VendorRepository;
@@ -62,17 +61,6 @@ class DefaultController extends AbstractController
         return $this->render('default/parts/header.html.twig', ['categories'=>$categoryRepository->findAll()]);
     }
 
-    /**
-     * @Route("/product/{product}", name="product")
-     */
-    public function product(Product $product, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
-    {
-        return $this->render('default/product.html.twig',
-            [   'categories'=>$categoryRepository->findAll(),
-                'vendors'=>$vendorRepository->findAll(),
-                    'product'=>$product
-            ]);
-    }
 
     /**
      * @IsGranted("ROLE_ADMIN")

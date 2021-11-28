@@ -12,6 +12,7 @@
         <div class="row">
             <div class="col-12 form-control bg-light">
                 <h1>Creaza un cont nou</h1>
+                <div class="col-4">
                 {{ form_start(registrationForm) }}
                 {{ form_row(registrationForm.email) }}
                 {{ form_row(registrationForm.plainPassword, {
@@ -21,6 +22,7 @@
 
                 <button type="submit" class="btn btn-secondary">Inregistrare</button>
                 {{ form_end(registrationForm) }}
+                </div>
             </div>
         </div>
     </div>

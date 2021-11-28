@@ -80,4 +80,11 @@ class Vendor
 
         return $this;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

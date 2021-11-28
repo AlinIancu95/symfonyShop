@@ -8,11 +8,12 @@
             <div class="row">
                 <div class="col-12">
                     <h1>Reseteaza parola</h1>
-
-                    {{ form_start(resetForm) }}
-                    {{ form_row(resetForm.plainPassword) }}
-                    <button class="btn btn-primary">Reseteaza parola</button>
-                    {{ form_end(resetForm) }}
+                    <div class="col-4">
+                        {{ form_start(resetForm) }}
+                        {{ form_row(resetForm.plainPassword) }}
+                        <button class="btn btn-primary">Reseteaza parola</button>
+                        {{ form_end(resetForm) }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserInfoType;
 use App\Repository\UserRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\VendorRepository;
@@ -106,5 +107,28 @@ private EmailVerifier $emailVerifier;
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("userinfo/{user}", name="userInfo_form")
+     */
+    public function userInfo(Request $request, User $user, VendorRepository $vendorRepository, CategoryRepository $categoryRepository): Response
+    {
+        $userInfoForm = $this->createForm(UserInfoType::class, $user);
+
+        $userInfoForm->handleRequest($request);
+        if ($userInfoForm->isSubmitted() && $userInfoForm->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('user/info.html.twig', [
+            'userInfoForm' => $userInfoForm->createView(),
+            'vendors'=>$vendorRepository->findAll(),
+            'categories'=> $categoryRepository->findAll()
+        ]);
+
     }
 }

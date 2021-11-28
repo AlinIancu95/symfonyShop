@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -39,16 +40,37 @@ class User implements UserInterface
     private $password='';
 
     /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Prenumele trebuie sa contina cel putin {{ limit }} caractere",
+     *      maxMessage = "Prenumele trebuie sa contina cel mult {{ limit }} caractere",
+     *      allowEmptyString = false
+     * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
+     *@Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Numele trebuie sa contina cel putin {{ limit }} caractere",
+     *      maxMessage = "Numele trebuie sa contina cel mult {{ limit }} caractere",
+     *      allowEmptyString = false
+     * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastName;
 
     /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Username-ul trebuie sa contina cel putin {{ limit }} caractere",
+     *      maxMessage = "Username-ul trebuie sa contina cel mult {{ limit }} caractere",
+     *      allowEmptyString = false
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $userName;

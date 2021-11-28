@@ -80,4 +80,11 @@ class Category
 
         return $this;
     }
+
+    function __toString()
+    {
+        return $this->name;
+    }
+
+
 }

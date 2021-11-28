@@ -24,7 +24,7 @@
                                                     {{ app.user.username }}
                                                 </a>
                                                 <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item bg-secondary text-white"  href="{{ url('app_login') }}">Intra in cont</a>
+                                                    <a class="dropdown-item bg-secondary text-white"  href="{{ url('userInfo_form', {'user':app.user.id}) }}">Intra in cont</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item  bg-secondary text-white" href="{{ path('app_logout') }}">Logout</a>
                                                 </div>
@@ -108,6 +108,11 @@
                                             <a class="nav-link text-white" href="{{ url('adminPanel') }}">Admin Panel</a>
                                         </li>
                                     {% endif %}
+                                     {% if is_granted('ROLE_VENDOR')  %}
+                                        <li class="nav-item">
+                                            <a class="nav-link text-white" href="{{ url('vendorProduct_form') }}">Vendor Panel</a>
+                                        </li>
+                                     {% endif %}
                                 </ul>
                             </div>
                         </nav>

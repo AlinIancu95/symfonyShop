@@ -10,18 +10,23 @@
         <div class="container" style="height: 500px">
             <div class="row">
                 <div class="col-12 mt-4">
-                    {{ form_start(requestForm) }}
-                    {{ form_row(requestForm.email) }}
-                    <div>
+                    <div class="col-4">
+                        {{ form_start(requestForm) }}
+                        {{ form_row(requestForm.email) }}
+                    </div>
+                    <div class="col-12">
                         <small>
                             Introdu adresa de email si iti vom trimite un
                             link pentru a vă reseta parola.
                         </small>
                     </div>
-
-                    <button class="btn btn-primary">Trimite</button>
-                    {{ form_end(requestForm) }}
-                    <h1>Reseteaza-ti parola</h1>
+                    <div class="col-4">
+                        <button class="btn btn-secondary">Trimite</button>
+                        {{ form_end(requestForm) }}
+                    </div>
+                    <div class="col-12">
+                        <h1>Reseteaza-ti parola</h1>
+                    </div>
                 </div>
             </div>
         </div>
