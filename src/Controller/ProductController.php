@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Form\VendorProductType;
 use App\Repository\CategoryRepository;
@@ -41,6 +42,14 @@ class ProductController extends AbstractController
         $vendorProductForm->handleRequest($request);
         if ($vendorProductForm->isSubmitted() && $vendorProductForm->isValid()){
             $em = $this->getDoctrine()->getManager();
+            $imageFiles = $vendorProductForm->get('productImages')->getData();
+            foreach ($imageFiles as $imageFile){
+                $imageFile->move('/var/www/html/national02/alin/symfonyShop/public/images', $imageFile->getClientOriginalName());
+                $productImage = new Image();
+                $productImage->setFile($imageFile->getClientOriginalName());
+                $productImage->setProduct($product);
+                $em->persist($productImage);
+            }
             $em->persist($product);
             $em->flush();
 
@@ -64,6 +73,14 @@ class ProductController extends AbstractController
         $vendorProductForm->handleRequest($request);
         if ($vendorProductForm->isSubmitted() && $vendorProductForm->isValid()){
             $em = $this->getDoctrine()->getManager();
+            $imageFiles = $vendorProductForm->get('productImages')->getData();
+            foreach ($imageFiles as $imageFile){
+                $imageFile->move('/var/www/html/national02/alin/symfonyShop/public/images', $imageFile->getClientOriginalName());
+                $productImage = new Image();
+                $productImage->setFile($imageFile->getClientOriginalName());
+                $productImage->setProduct($product);
+                $em->persist($productImage);
+            }
             $em->persist($product);
             $em->flush();
 

@@ -76,6 +76,25 @@ class Product
      */
     private $images;
 
+
+    /**
+     * @Assert\All({
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/png"},
+     *     mimeTypesMessage = "Imaginea trebuie sa fie png"
+     * ),
+     * @Assert\Image(
+     *     minWidth = 725,
+     *     maxWidth = 725,
+     *     minHeight = 640,
+     *     maxHeight = 640
+     * )
+     * })
+     */
+    private $productImages;
+
+
     /**
      * @ORM\OneToOne(targetEntity=OrderItem::class, mappedBy="product", cascade={"persist", "remove"})
      */
@@ -288,4 +307,22 @@ class Product
 
         return $price;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProductImages()
+    {
+        return $this->productImages;
+    }
+
+    /**
+     * @param mixed $productImages
+     */
+    public function setProductImages($productImages)
+    {
+        $this->productImages = $productImages;
+    }
+
+
 }
