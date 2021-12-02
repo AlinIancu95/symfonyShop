@@ -9,10 +9,11 @@
                             <a href="{{ url('homepage') }}" class="navbar-brand"><img width="100px" src="{{ asset('images/logo.png') }}"  alt="logo.png"></a>
                             </div>
                             <div class="col-6">
-                                <form class="form-inline mt-3 w-100">
-                                    <input  class="form-control mr-sm-2 w-75" type="search" placeholder="Rapid si ieftin" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cauta</button>
-                                </form>
+                                {{
+                                    render(controller(
+                                    'App\\Controller\\SearchController::searchBar'
+                                ))
+                                }}
                             </div>
                             <div class="navbar navbar-expand-lg navbar-dark bg-dark col-4">
                                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -21,10 +22,10 @@
                                             <li class="nav-item dropdown active">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                                                    {{ app.user.username }}
+                                                    {{ app.user.firstname }}
                                                 </a>
                                                 <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item bg-secondary text-white"  href="{{ url('userInfo_form', {'user':app.user.id}) }}">Intra in cont</a>
+                                                    <a class="dropdown-item bg-secondary text-white"  href="{{ url('userInfo_form', {'user':app.user.id}) }}">Informatii cont</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item  bg-secondary text-white" href="{{ path('app_logout') }}">Logout</a>
                                                 </div>

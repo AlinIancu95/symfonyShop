@@ -1,0 +1,11 @@
+{{  form_start(form,{
+    'attr': {'class': 'form-inline mt-3 w-100', 'action': path('handleSearch')}
+})  }}
+
+
+    {{ form_widget(form.search, {
+        'attr': {'class':'form-control mr-sm-2 w-75 search-query', 'placeholder': 'Rapid si ieftin'}
+    }) }}
+
+
+{{ form_end(form)}}

@@ -16,7 +16,7 @@
                                         {{ category.name }}
                                     </button>
                                     <div class="dropdown-menu bg-secondary">
-                                        <a class="text-white" href="">{{ category.name }}</a>
+                                        <a class="text-white" href="{{ url('category', {'category':category.id}) }}">{{ category.name }}</a>
                                     </div>
                                 </div>
                             {% endfor %}
