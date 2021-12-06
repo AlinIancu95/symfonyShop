@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CartService;
 use App\Repository\CategoryRepository;
 use App\Repository\VendorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
+    public function login(CartService $cartService, AuthenticationUtils $authenticationUtils, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -29,7 +30,8 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
                 'error' => $error,
                 'categories'=>$categoryRepository->findAll(),
-                'vendors'=>$vendorRepository->findAll()
+                'vendors'=>$vendorRepository->findAll(),
+                'cart' => $cartService->getCart()
         ]);
     }
 

@@ -29,7 +29,7 @@ class CartItem
     private $cart;
 
     /**
-     * @ORM\OneToOne(targetEntity=Product::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="cartItems")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;

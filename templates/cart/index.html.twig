@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cosul de cumparaturi{% endblock %}
+
+{% block body %}
+    {% if cartService.getCartCount() >0 %}
+        <div class="container-fluid bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mt-3 mb-5">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th></th>
+                                    <th>Nume</th>
+                                    <th>Pret unitar</th>
+                                    <th>Cantitate </th>
+                                    <th>Pret Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cartItem in cart.cartItems %}
+                                    <tr>
+                                        <td><a href="{{ url('product', {'product':cartItem.product.getId()}) }}"><img width="70px" src="{{ asset('images/' ~ cartItem.product.images.first) }}"></a></td>
+                                        <td style="padding-top: 30px">{{ cartItem.product.name }}</td>
+                                        <td style="padding-top: 30px">{{ cartItem.product.price |number_format(2, ',', '.') }} Lei</td>
+                                        <td  style="padding-top: 30px">
+                                            <form method="post" action="{{ url('cart_item_update', {'product':cartItem.product.id}) }}">
+                                                <input name="quantity" type="number" min="1" max="100" value="{{ cartItem.quantity }}">
+                                                <button class="btn btn-secondary" type="submit">Update</button>
+                                            </form>
+                                        </td>
+                                        <td style="padding-top: 30px">{{ (cartItem.product.price * cartItem.quantity) |number_format(2, ',', '.') }} Lei</td>
+                                        <td><a style="color: red" class="btn" href="{{ url('cart_item_delete', {'product':cartItem.product.id}) }}">X</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>{{ cartService.getCartTotal |number_format(2, ',', '.') }} Lei</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a class="btn btn-secondary" href="{{ url('cart_empty') }}">Sterge cos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center" style="height: 500px">
+                        <h5 style="margin-top: 210px">Nu exista nimic in cos</h5>
+                        <a class="btn btn-secondary" href="{{ url('homepage') }}">Inapoi la cumparaturi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

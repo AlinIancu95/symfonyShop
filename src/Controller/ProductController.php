@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Product;
+use App\Service\CartService;
 use App\Form\VendorProductType;
 use App\Repository\CategoryRepository;
 use App\Repository\VendorRepository;
@@ -19,12 +20,13 @@ class ProductController extends AbstractController
      *
      * @Route("/product/{product}", name="product")
      */
-    public function product(Product $product, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
+    public function product(Product $product, CategoryRepository $categoryRepository, VendorRepository $vendorRepository, CartService $cartService): Response
     {
         return $this->render('product/index.html.twig',
             [   'categories'=>$categoryRepository->findAll(),
                 'vendors'=>$vendorRepository->findAll(),
-                'product'=>$product
+                'product'=>$product,
+                'cart' => $cartService->getCart()
             ]);
     }
 
@@ -33,7 +35,7 @@ class ProductController extends AbstractController
      * @IsGranted("ROLE_VENDOR")
      * @Route("vendorProduct/create", name="vendorProduct_form")
      */
-    public function create(Request $request, VendorRepository $vendorRepository, CategoryRepository $categoryRepository): Response
+    public function create(Request $request, VendorRepository $vendorRepository, CategoryRepository $categoryRepository, CartService $cartService): Response
     {
         $product = new Product();
         $product->setType('product');
@@ -57,7 +59,8 @@ class ProductController extends AbstractController
         return $this->render('product/vendorProduct.html.twig', [
             'vendorProductForm' => $vendorProductForm->createView(),
             'vendors'=>$vendorRepository->findAll(),
-            'categories'=> $categoryRepository->findAll()
+            'categories'=> $categoryRepository->findAll(),
+            'cart' => $cartService->getCart()
         ]);
 
     }
@@ -88,7 +91,8 @@ class ProductController extends AbstractController
         return $this->render('product/vendorProduct.html.twig', [
             'vendorProductForm' => $vendorProductForm->createView(),
             'vendors'=>$vendorRepository->findAll(),
-            'categories'=> $categoryRepository->findAll()
+            'categories'=> $categoryRepository->findAll(),
+            'cart' => $cartService->getCart()
         ]);
 
     }

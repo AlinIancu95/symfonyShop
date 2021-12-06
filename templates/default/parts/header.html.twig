@@ -22,7 +22,11 @@
                                             <li class="nav-item dropdown active">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                                                    {{ app.user.firstname }}
+                                                    {% if app.user.nickName > 0 %}
+                                                        {{ app.user.nickName }}
+                                                    {% else %}
+                                                        {{ app.user.email }}
+                                                    {% endif %}
                                                 </a>
                                                 <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdownMenuLink">
                                                     <a class="dropdown-item bg-secondary text-white"  href="{{ url('userInfo_form', {'user':app.user.id}) }}">Informatii cont</a>
@@ -45,16 +49,59 @@
                                         {% endif %}
                                         <li class="nav-item dropdown active">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                {% if cartService.getCartCount()  > 0 %}
+                                                    <span class="badge badge-danger">{{ cartService.getCartCount() }}</span>
+                                                {% else %}
+                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                {% endif %}
                                                 Cosul Meu
                                             </a>
-                                            <div class="dropdown-menu bg-secondary text-center" aria-labelledby="navbarDropdownMenuLink">
-                                                <div class="dropdown-item bg-secondary text-white">
-                                                    <img src="#">Produs - pret     <button type="submit" class="btn btn-danger align-right">X</button>
+                                            {% if cartService.getCartCount()  > 0 %}
+                                            <div style="left: -120px;" class="dropdown-menu bg-secondary text-center" aria-labelledby="navbarDropdownMenuLink">
+                                                <div class="dropdown-item bg-secondary text-white container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-12" style="font-size: 12px">
+                                                            {% for cartItem in cart.cartItems %}
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img width="30px" src="{{ asset('images/' ~ cartItem.product.images.first) }}" alt="{{ cartItem.product.name }}">
+                                                                        </td>
+                                                                        <td>
+                                                                            <span style="width: 249px">{{ cartItem.product.name }}</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            &nbsp;&nbsp;&nbsp;x{{ cartItem.quantity }}
+                                                                        </td>
+                                                                        <td>
+                                                                            &nbsp;&nbsp;{{ (cartItem.product.price * cartItem.quantity) |number_format(2, ',', '.') }} Lei
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="color: red" href="{{ url('cart_item_delete', {'product':cartItem.product.id}) }}" class="btn  align-right">X</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            {% endfor %}
+                                                        </div>
+                                                            <div class="col-12 mt-2" style="font-size: 16px">
+                                                                <span>Total: {{ cartService.getCartCount() }} produse</span>
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                {{ cartService.getCartTotal |number_format(2, ',', '.') }} Lei
+                                                            </div>
+                                                    </div>
                                                 </div>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="btn btn-secondary" href="#">Detalii cos</a>
+                                                <a style="font-size: 14px" class="btn btn-secondary" href="{{ url('cart') }}">Detalii cos</a>
                                             </div>
+                                            {% else %}
+                                                <div class="dropdown-menu bg-secondary text-center" aria-labelledby="navbarDropdownMenuLink">
+                                                    <div class="dropdown-item bg-secondary text-white container-fluid">
+                                                        <span style="font-size: 14px">Cosul este gol</span>
+                                                    </div>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a style="font-size: 14px" class="btn btn-secondary" href="{{ url('cart') }}">Detalii cos</a>
+                                                </div>
+                                            {% endif %}
                                         </li>
                                     </ul>
                                 </div>

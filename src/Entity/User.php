@@ -71,9 +71,9 @@ class User implements UserInterface
      *      maxMessage = "Username-ul trebuie sa contina cel mult {{ limit }} caractere",
      *      allowEmptyString = false
      * )
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $userName;
+    private $nickName;
 
     /**
      * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user", orphanRemoval=true)
@@ -213,9 +213,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function setUserName(string $userName): self
+    public function getnickName(): ?string
     {
-        $this->userName = $userName;
+        return $this->nickName;
+    }
+
+    public function setnickName(string $nickName): self
+    {
+        $this->nickName = $nickName;
 
         return $this;
     }
@@ -352,13 +357,8 @@ class User implements UserInterface
         return $this;
     }
 
-
-
     public function __toString() {
-        if(is_null($this->userName)) {
-            return 'NULL';
-        }
-        return $this->userName;
+        return $this->getUsername();
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Request;
 use App\Repository\VendorRepository;
@@ -37,7 +38,7 @@ class SearchController extends AbstractController
      * @Route("/search", name="handleSearch")
      * @param Request $request
      */
-    public function handleSearch(\Symfony\Component\HttpFoundation\Request $request, VendorRepository $vendorRepository, CategoryRepository $categoryRepository){
+    public function handleSearch(\Symfony\Component\HttpFoundation\Request $request, VendorRepository $vendorRepository, CategoryRepository $categoryRepository, CartService $cartService){
         $requestData = $request->request->all();
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
@@ -54,7 +55,7 @@ class SearchController extends AbstractController
             ['categories'=>$categoryRepository->findAll(),
                 'vendors'=>$vendorRepository->findAll(),
                 'products'=>$products,
-                'search'=>$request->request
+                'cart' => $cartService->getCart()
             ]);
     }
 }

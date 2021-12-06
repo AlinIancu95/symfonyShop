@@ -2,12 +2,34 @@
 {% block title %}Date personale{% endblock %}
 
 {% block body %}
-    {% if app.user.firstName is null %}
+    {% if app.user.nickName > 0 %}
         <div class="container-fluid bg-light">
             <div class="container" style="height: 500px">
                 <div class="row">
-                    <div class="col-4 mt-3">
-                        {{ form(userInfoForm) }}
+                    <div class="col-12 mt-3">
+                        <h2>Profilul tau</h2>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <h4>Email</h4>
+                        <p>{{ app.user }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 ">
+                        <h4>Prenume</h4>
+                        <p>{{ app.user.firstname }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Nume</h4>
+                        <p>{{ app.user.lastname }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Nickname</h4>
+                        <p>{{ app.user.nickName }}</p>
                     </div>
                 </div>
             </div>
@@ -17,18 +39,7 @@
             <div class="container" style="height: 500px">
                 <div class="row">
                     <div class="col-4 mt-3">
-                        <div class="col-3">
-                            <h5>Username</h5>
-                            <p class="form-control"><strong>{{ app.user }}</strong></p>
-                        </div>
-                        <div class="col-3 ">
-                            <h5>Prenume</h5>
-                            <p class="form-control"><strong>{{ app.user.firstname }}</strong></p>
-                        </div>
-                        <div class="col-3">
-                            <h5>Nume</h5>
-                            <p class="form-control"><strong>{{ app.user.lastname }}</strong></p>
-                        </div>
+                        {{ form(userInfoForm) }}
                     </div>
                 </div>
             </div>
