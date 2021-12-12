@@ -61,7 +61,7 @@
                                                 <div class="dropdown-item bg-secondary text-white container-fluid">
                                                     <div class="row">
                                                         <div class="col-12" style="font-size: 12px">
-                                                            {% for cartItem in cart.cartItems %}
+                                                            {% for cartItem in twigGlobalsService.getMenuCart.cartItems %}
                                                                 <table>
                                                                     <tr>
                                                                         <td>
@@ -128,7 +128,7 @@
                                             Categorii
                                         </a>
                                         <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
-                                            {% for category in categories %}
+                                            {% for category in twigGlobalsService.getMenuCategories() %}
                                                 <a class="dropdown-item bg-secondary" href="{{ url('category', {'category':category.id}) }}">
                                                     {{ category.name }}
                                                     <span class="badge badge-dark">{{ category.getProducts()|length }}</span>
@@ -142,7 +142,7 @@
                                             Vanzatori
                                         </a>
                                         <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
-                                            {% for vendor in vendors %}
+                                            {% for vendor in twigGlobalsService.getMenuVendors() %}
                                                 <a class="dropdown-item bg-secondary" href="{{ url('vendor', {'vendor':vendor.id}) }}">
                                                     {{ vendor.name }}
                                                     <span class="badge badge-dark">{{ vendor.getProducts()|length }}</span>

@@ -4,10 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Service\CartService;
-use App\Repository\CategoryRepository;
-use App\Repository\VendorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,12 +13,10 @@ class CartController extends AbstractController
     /**
      * @Route("/cart", name="cart")
      */
-    public function index(CartService $cartService, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
+    public function index(CartService $cartService): Response
     {
         return $this->render('cart/index.html.twig', [
             'cart' => $cartService->getCart(),
-            'categories'=>$categoryRepository->findAll(),
-            'vendors'=>$vendorRepository->findAll()
         ]);
     }
 

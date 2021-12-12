@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-use App\Service\CartService;
-use App\Repository\CategoryRepository;
-use App\Repository\VendorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +12,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(CartService $cartService, AuthenticationUtils $authenticationUtils, CategoryRepository $categoryRepository, VendorRepository $vendorRepository): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -29,9 +26,6 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
                 'error' => $error,
-                'categories'=>$categoryRepository->findAll(),
-                'vendors'=>$vendorRepository->findAll(),
-                'cart' => $cartService->getCart()
         ]);
     }
 

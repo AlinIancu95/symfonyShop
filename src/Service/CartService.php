@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Product;
+use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -19,14 +20,18 @@ class CartService
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var Security */
+    private $security;
+
     /**
      * @param SessionInterface $session
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(SessionInterface $session, EntityManagerInterface $entityManager)
+    public function __construct(SessionInterface $session, EntityManagerInterface $entityManager, Security $security)
     {
         $this->session = $session;
         $this->entityManager = $entityManager;
+        $this->security = $security;
         $this->getCurrentCart();
     }
 
@@ -132,6 +137,12 @@ class CartService
     {
         if ($this->session->has('cart_id')){
             $this->cart = $this->entityManager->getRepository(Cart::class)->find($this->session->get('cart_id'));
+            $user = $this->security->getUser();
+            if ($user){
+                $this->cart->setUser($user);
+                $this->entityManager->persist($this->cart);
+                $this->entityManager->flush();
+            }
         } else {
             $this->cart = new Cart();
             $this->entityManager->persist($this->cart);

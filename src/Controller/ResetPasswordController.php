@@ -3,9 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Service\CartService;
-use App\Repository\CategoryRepository;
-use App\Repository\VendorRepository;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,7 +38,7 @@ class ResetPasswordController extends AbstractController
      *
      * @Route("", name="app_forgot_password_request")
      */
-    public function request(Request $request, MailerInterface $mailer, CategoryRepository $categoryRepository, VendorRepository $vendorRepository, CartService $cartService ): Response
+    public function request(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
@@ -56,9 +53,6 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
-            'categories'=>$categoryRepository->findAll(),
-            'vendors'=>$vendorRepository->findAll(),
-            'cart' => $cartService->getCart()
         ]);
     }
 
@@ -67,7 +61,7 @@ class ResetPasswordController extends AbstractController
      *
      * @Route("/check-email", name="app_check_email")
      */
-    public function checkEmail(CategoryRepository $categoryRepository, VendorRepository $vendorRepository, CartService $cartService): Response
+    public function checkEmail(): Response
     {
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
@@ -77,9 +71,6 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
-            'categories'=>$categoryRepository->findAll(),
-            'vendors'=>$vendorRepository->findAll(),
-            'cart' => $cartService->getCart()
         ]);
     }
 
@@ -88,7 +79,7 @@ class ResetPasswordController extends AbstractController
      *
      * @Route("/reset/{token}", name="app_reset_password")
      */
-    public function reset(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, EntityManagerInterface $entityManager, string $token = null, CategoryRepository $categoryRepository, VendorRepository $vendorRepository, CartService $cartService): Response
+    public function reset(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, EntityManagerInterface $entityManager, string $token = null): Response
     {
         if ($token) {
             // We store the token in session and remove it from the URL, to avoid the URL being
@@ -139,9 +130,6 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
-            'categories'=>$categoryRepository->findAll(),
-            'vendors'=>$vendorRepository->findAll(),
-            'cart' => $cartService->getCart()
         ]);
     }
 

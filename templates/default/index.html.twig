@@ -10,7 +10,7 @@
                     <div class="col-3 list-group mt-2 mb-2">
                         <ul>
                             <h3>Produse</h3>
-                            {% for category in categories %}
+                            {% for category in twigGlobalsService.getMenuCategories() %}
                                 <div class="btn-group dropright list-group col-12 mt-1">
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {{ category.name }}

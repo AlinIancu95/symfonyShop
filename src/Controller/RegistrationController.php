@@ -6,11 +6,8 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserInfoType;
 use App\Repository\UserRepository;
-use App\Repository\CategoryRepository;
-use App\Repository\VendorRepository;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
-use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +31,7 @@ private EmailVerifier $emailVerifier;
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, VendorRepository $vendorRepository, CartService $cartService): Response
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $user->setRoles(['ROLE_USER']);
@@ -73,9 +70,6 @@ private EmailVerifier $emailVerifier;
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'categories'=>$categoryRepository->findAll(),
-            'vendors'=>$vendorRepository->findAll(),
-            'cart' => $cartService->getCart()
         ]);
     }
 
@@ -114,7 +108,7 @@ private EmailVerifier $emailVerifier;
     /**
      * @Route("userinfo/{user}", name="userInfo_form")
      */
-    public function userInfo(CartService $cartService, Request $request, User $user, VendorRepository $vendorRepository, CategoryRepository $categoryRepository): Response
+    public function userInfo(Request $request, User $user): Response
     {
         $userInfoForm = $this->createForm(UserInfoType::class, $user);
 
@@ -128,9 +122,6 @@ private EmailVerifier $emailVerifier;
         }
         return $this->render('user/info.html.twig', [
             'userInfoForm' => $userInfoForm->createView(),
-            'vendors'=>$vendorRepository->findAll(),
-            'categories'=> $categoryRepository->findAll(),
-            'cart' => $cartService->getCart()
         ]);
 
     }
