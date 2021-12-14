@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
-use App\Entity\Vendor;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,26 +21,6 @@ class DefaultController extends AbstractController
                 'productsLaptop'=>$productRepository->findBy(['category'=>2], ['id'=>'DESC'], 4),
                 'productsTV'=>$productRepository->findBy(['category'=>1], ['id'=>'DESC'], 4),
                 'productsPhone'=>$productRepository->findBy(['category'=>3], ['id'=>'DESC'], 4),
-            ]);
-    }
-
-    /**
-     * @Route("/category/{category}", name="category")
-     */
-    public function category(Category $category): Response
-    {
-        return $this->render('default/category.html.twig',
-            ['category'=>$category
-            ]);
-    }
-
-    /**
-     * @Route("/vendor/{vendor}", name="vendor")
-     */
-    public function vendor(Vendor $vendor): Response
-    {
-        return $this->render('default/vendor.html.twig',
-            [   'vendor'=>$vendor,
             ]);
     }
 
